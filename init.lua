@@ -62,10 +62,6 @@ return require('packer').startup(function(use)
     config = function() require'colorizer'.setup() end
   }
 
-  -- js/ts
-  use 'pangloss/vim-javascript'
-  use 'MaxMEllon/vim-jsx-pretty'
-  use 'HerringtonDarkholme/yats.vim'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -139,6 +135,16 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- js/ts
+  use 'pangloss/vim-javascript'
+  use 'MaxMEllon/vim-jsx-pretty'
+  use 'HerringtonDarkholme/yats.vim'
+  use {
+    'windwp/nvim-ts-autotag',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = function() require('nvim-ts-autotag').setup() end,
+  }
+
   use {
     'neoclide/coc.nvim',
     branch = 'release',
@@ -206,14 +212,6 @@ return require('packer').startup(function(use)
   }
 end)
 
-
--- text objects tree sitter, this seems good
--- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
---
 -- https://github.com/hrsh7th/vim-vsnip
---
---
--- lua first git signs this looks good
--- https://github.com/lewis6991/gitsigns.nvim
 --
 -- https://github.com/phaazon/hop.nvim
