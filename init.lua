@@ -12,15 +12,20 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'justinmk/vim-dirvish'
 
-  use {
-    'mhinz/vim-startify',
-    config = function()
-      vim.g['startify_change_to_vcs_root'] = 1
-      vim.g['startify_change_to_dir'] = 0
-    end,
-  }
+  -- Startup [[[
+  --   'mhinz/vim-startify',
+  --   config = function()
+  --     vim.g['startify_change_to_vcs_root'] = 1
+  --     vim.g['startify_change_to_dir'] = 0
+  --   end,
+  -- }
+  use 'rmagatti/auto-session'
+  --- ]]]
 
-  use 'junegunn/goyo.vim'
+  use {
+    'junegunn/goyo.vim',
+    config = 'vim.cmd[[nnoremap <leader>o :Goyo<CR>]]'
+  }
 
   use 'tpope/vim-repeat'
   use 'tpope/vim-eunuch'
@@ -45,7 +50,10 @@ return require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+    },
     config = function() vim.cmd [[
       nnoremap <leader>ff <cmd>Telescope find_files<cr>
       nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -78,6 +86,7 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Are these used?
   use {
     'nvim-treesitter/nvim-treesitter-textobjects',
     requires = { 'nvim-treesitter/nvim-treesitter' },
@@ -135,22 +144,37 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- js/ts
-  use 'pangloss/vim-javascript'
-  use 'MaxMEllon/vim-jsx-pretty'
-  use 'HerringtonDarkholme/yats.vim'
+  -- js/ts [[[
+  use {
+    'pangloss/vim-javascript',
+    opt = true,
+    ft = { 'javascript', 'typescript', 'typescriptreact' },
+  }
+  use {
+    'MaxMEllon/vim-jsx-pretty',
+    opt = true,
+    ft = { 'javascript', 'typescript', 'typescriptreact' },
+  }
+  use {
+    'HerringtonDarkholme/yats.vim',
+    opt = true,
+    ft = { 'javascript', 'typescript', 'typescriptreact' },
+  }
   use {
     'windwp/nvim-ts-autotag',
+    opt = true,
+    ft = { 'javascript', 'typescript', 'typescriptreact' },
     requires = { 'nvim-treesitter/nvim-treesitter' },
     config = function() require('nvim-ts-autotag').setup() end,
   }
-
   use {
     'neoclide/coc.nvim',
     branch = 'release',
-    run = function() vim.cmd [[
-      CocInstall coc-tsserver
-    ]] end,
+    opt = true,
+    ft = { 'javascript', 'typescript', 'typescriptreact' },
+    run = function()
+      vim.cmd [[CocInstall coc-tsserver]]
+    end,
     config = function() vim.cmd [[
       autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -172,6 +196,7 @@ return require('packer').startup(function(use)
       endfunction
    ]] end
   }
+  -- ]]]
 
   use {
     'TimUntersberger/neogit',
@@ -184,18 +209,23 @@ return require('packer').startup(function(use)
   use {
     "npxbr/gruvbox.nvim",
     requires = {"rktjmp/lush.nvim"},
-    -- config = 'vim.cmd[[colo gruvbox]]'
+    config = function()
+      vim.g['gruvbox_contrast_dark'] = 'soft'
+      vim.cmd[[colo gruvbox]]
+    end
   }
 
   use {
     'savq/melange',
-    config = 'vim.cmd[[colo melange]]'
+    -- config = 'vim.cmd[[colo melange]]'
   }
 
   use "tversteeg/registers.nvim"
 
   use {
     'npxbr/glow.nvim',
+    opt = true,
+    ft = 'markdown',
     config = function() vim.cmd [[
       nnoremap <leader>p :Glow<CR>
     ]] end,
@@ -213,6 +243,7 @@ return require('packer').startup(function(use)
             noremap = true,
             buffer = true,
 
+            -- is there nicer way to do these?
             ['n gj'] = { expr = true, "&diff ? 'gj' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
             ['n gk'] = { expr = true, "&diff ? 'gk' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
           }
@@ -220,9 +251,25 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'AndrewRadev/splitjoin.vim' -- gJ gS
-end)
+  use {
+    'edluffy/specs.nvim',
+    config = function()
+      require('specs').setup{
+        show_jumps  = true,
+        min_jump = 30,
+        popup = {
+          delay_ms = 0, -- delay before popup displays
+          inc_ms = 10, -- time increments used for fade/resize effects
+          blend = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
+          width = 10,
+          winhl = "PMenu",
+          fader = require('specs').linear_fader,
+          resizer = require('specs').shrink_resizer
+        }
+      }
+    end
+  }
 
--- https://github.com/hrsh7th/vim-vsnip
---
--- https://github.com/phaazon/hop.nvim
+  use 'AndrewRadev/splitjoin.vim' -- gJ gS, could treesitter do something like this?
+
+end)

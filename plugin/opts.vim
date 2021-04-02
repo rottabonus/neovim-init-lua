@@ -14,34 +14,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Sizing window horizontally
-nnoremap <A-,> <C-W>10<
-nnoremap <A-.> <C-W>10>
-
-" Sizing window vertically, s -> short, t -> tall
-nnoremap <A-t> <C-W>10+
-nnoremap <A-s> <C-W>10-
-
-nnoremap <C-w>= :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <C-w>- :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <C-w>] :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <C-w>[ :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-
 " Map leader to space
 let mapleader=" "
 
 "" space space to like spacemacs
 nnoremap <leader><leader> :
-nnoremap <leader>q :Bdelete<CR>
 
 "" save and trim white space
 nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:w<CR>
-
-" Move lines, cool, but kinda not needed
-nnoremap <M-k> :m .-2<CR>==
-nnoremap <M-j> :m .+1<CR>==
-vnoremap <M-j> :m '>+1<CR>gv=gv
-vnoremap <M-k> :m '<-2<CR>gv=gv
 
 " Look for the selection, very nice trick
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -82,10 +62,8 @@ set showcmd
 set wildmenu
 
 
-"" TODO what does it do
 set showmatch
 
-"" Dunno what these do
 set incsearch
 set hlsearch
 
@@ -97,3 +75,4 @@ set winblend=10
 set pumblend=10
 set completeopt=menuone,noinsert,noselect
 "" }}}
+
