@@ -17,7 +17,7 @@ return require('packer').startup(function(use)
     config = function()
       vim.g['startify_change_to_vcs_root'] = 1
       vim.g['startify_change_to_dir'] = 0
-    end
+    end,
   }
 
   use 'junegunn/goyo.vim'
@@ -207,14 +207,20 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim'
     },
     config = function()
-      require('gitsigns').setup()
-      -- TODO FIXME: 
-      -- Move up and down hunks with gj gk???
-      
+      require('gitsigns').setup {
+          keymaps = {
+            -- Default keymap options
+            noremap = true,
+            buffer = true,
+
+            ['n gj'] = { expr = true, "&diff ? 'gj' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+            ['n gk'] = { expr = true, "&diff ? 'gk' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+          }
+      }
     end
   }
 
-  use 'AndrewRadev/splitjoin.vim'
+  use 'AndrewRadev/splitjoin.vim' -- gJ gS
 end)
 
 -- https://github.com/hrsh7th/vim-vsnip
