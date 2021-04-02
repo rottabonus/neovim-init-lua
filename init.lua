@@ -208,8 +208,13 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('gitsigns').setup()
+      -- TODO FIXME: 
+      -- Move up and down hunks with gj gk???
+      
     end
   }
+
+  use 'AndrewRadev/splitjoin.vim'
 end)
 
 -- https://github.com/hrsh7th/vim-vsnip
