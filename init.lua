@@ -13,9 +13,15 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'justinmk/vim-dirvish'
 
-    use 'rmagatti/auto-session'
-
     use {
+        'mhinz/vim-startify',
+    	  config = function()
+            vim.g['startify_change_to_vcs_root'] = 1
+            vim.g['startify_change_to_dir'] = 0
+        end
+	  }
+
+   use {
         'junegunn/goyo.vim',
         config = 'vim.cmd[[nnoremap <leader>o :Goyo<CR>]]'
     }
