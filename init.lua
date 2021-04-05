@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
             sections = {
               lualine_a = { {'mode', upper = true} },
               lualine_b = { {'branch', icon = ''} },
-              lualine_c = { {'filename', file_status = true} },
+              lualine_c = { {'filename', file_status = true}, { 'diagnostics', sources = { 'coc' } } },
               lualine_x = { 'encoding', 'fileformat', 'filetype' },
               lualine_y = { 'progress' },
               lualine_z = { 'location'  },
@@ -304,5 +304,6 @@ return require('packer').startup(function(use)
     }
 
     use 'AndrewRadev/splitjoin.vim' -- gJ gS, could treesitter do something like this?
-
+    
+    use 'ryanoasis/vim-devicons'
 end)
