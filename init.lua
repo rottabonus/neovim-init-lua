@@ -14,6 +14,38 @@ return require('packer').startup(function(use)
     use 'justinmk/vim-dirvish'
 
     use {
+        'hoob3rt/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+          require('lualine').setup{
+            options = {
+              theme = 'gruvbox',
+              section_separators = {'', ''},
+              component_separators = {'', ''},
+              icons_enabled = true,
+            },
+            sections = {
+              lualine_a = { {'mode', upper = true} },
+              lualine_b = { {'branch', icon = ''} },
+              lualine_c = { {'filename', file_status = true} },
+              lualine_x = { 'encoding', 'fileformat', 'filetype' },
+              lualine_y = { 'progress' },
+              lualine_z = { 'location'  },
+            },
+            inactive_sections = {
+              lualine_a = {  },
+              lualine_b = {  },
+              lualine_c = { 'filename' },
+              lualine_x = { 'location' },
+              lualine_y = {  },
+              lualine_z = {   }
+            },
+            extensions = { 'fugitive' }
+        }
+      end
+    }
+
+    use {
         'mhinz/vim-startify',
     	  config = function()
             vim.g['startify_change_to_vcs_root'] = 1
