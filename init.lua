@@ -260,29 +260,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
-        config = function()
-            require('gitsigns').setup {
-                keymaps = {
-                    -- Default keymap options
-                    noremap = true,
-                    buffer = true,
-
-                    -- is there nicer way to do these?
-                    ['n gj'] = {
-                        expr = true,
-                        "&diff ? 'gj' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"
-                    },
-                    ['n gk'] = {
-                        expr = true,
-                        "&diff ? 'gk' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"
-                    }
-                }
-            }
-        end
-    }
+    use {'mhinz/vim-signify'}
 
     use {
         'edluffy/specs.nvim',
@@ -303,7 +281,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use 'AndrewRadev/splitjoin.vim' -- gJ gS, could treesitter do something like this?
+
     
     use 'ryanoasis/vim-devicons'
 end)
