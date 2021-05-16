@@ -1,5 +1,6 @@
 {
     "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "haskell"],
+    "javascript.suggestionActions.enabled": false,
     "eslint.filetypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
     "suggest.enablePreview": true,
     "languageserver": {
@@ -7,7 +8,7 @@
       "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"]
+      "filetypes": ["haskell", "lhaskell"]
     }
   }
 }
