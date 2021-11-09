@@ -217,8 +217,8 @@ return require('packer').startup(function(use)
         'neoclide/coc.nvim',
         branch = 'release',
         opt = true,
-        ft = {'javascript', 'typescript', 'typescriptreact', 'haskell', 'javascriptreact'},
-        run = function() vim.cmd [[CocInstall coc-tsserver]] end,
+        ft = {'javascript', 'typescript', 'typescriptreact', 'haskell', 'javascriptreact', 'java'},
+        run = function() vim.cmd [[CocInstall coc-tsserver], [CocInstall coc-java]] end,
         config = function()
             vim.cmd [[
       autocmd CursorHold * silent call CocActionAsync('highlight')
